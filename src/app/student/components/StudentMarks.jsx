@@ -39,7 +39,7 @@ export default function StudentMarks({ onMenu, data }) {
         </div>
       ) : (
         <>
-          <div className="mb-6 mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
+          <div className="mb-6 mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
             <StatCard icon={Award} label="Overall Average" value={`${avg}%`} color="green" />
             <StatCard icon={ClipboardList} label="Subjects" value={marks.length} color="blue" />
             <StatCard

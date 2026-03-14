@@ -1,6 +1,5 @@
-// import ForestryAcademics from "../../../ForestryAcademics";
+import { redirect } from "next/navigation";
 
-// export default function Page() {
-//   return <ForestryAcademics />;
-// }
-
+export default function ForestyAcademicsPage() {
+  redirect("/");
+}

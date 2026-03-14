@@ -158,19 +158,13 @@ export default function Features() {
   return (
     <section id="features" className="relative py-24 lg:py-32">
       {/* Background */}
-      <div className="absolute inset-0 bg-grid-forest opacity-50" />
+      <div className="absolute inset-0 bg-grid-forest opacity-20" />
       <div className="absolute top-0 left-0 right-0 h-px glow-line opacity-20" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="max-w-2xl mx-auto text-center mb-16">
-          <span
-            className="mb-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-xs font-medium tracking-widest uppercase text-green-400/90"
-            style={{ fontFamily: "'JetBrains Mono', monospace" }}
-          >
-            <svg className="w-3.5 h-3.5" viewBox="0 0 14 14" fill="none"><path d="M7 1l1.8 3.7L13 5.4l-3 2.9.7 4.1L7 10.3l-3.7 2.1.7-4.1-3-2.9 4.2-.7z" fill="currentColor" /></svg>
-            Everything You Need
-          </span>
+       
           <h2 className="font-display text-4xl sm:text-5xl font-semibold text-ivory-100 mb-5 text-balance">
             Built for How Institutes{' '}
             <span className="italic" style={{ color: '#16A34A' }}>Actually Work</span>

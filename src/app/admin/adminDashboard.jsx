@@ -25,41 +25,68 @@ import {
   Cell,
 } from "recharts";
 
-/* ─── Inline sub-components (replace with your own if you prefer) ─── */
+/* ─── Inline sub-components ─── */
 
 function StatCard({ icon: Icon, label, value, sub, color = "blue", large }) {
+  /* Soft pastel icon backgrounds with a matching accent and glow */
   const palette = {
-    green:  { bg: "bg-emerald-50 dark:bg-emerald-900/20", icon: "text-emerald-600 dark:text-emerald-400", ring: "ring-emerald-200 dark:ring-emerald-800" },
-    blue:   { bg: "bg-blue-50   dark:bg-blue-900/20",   icon: "text-blue-600   dark:text-blue-400",   ring: "ring-blue-200   dark:ring-blue-800"   },
-    amber:  { bg: "bg-amber-50  dark:bg-amber-900/20",  icon: "text-amber-600  dark:text-amber-400",  ring: "ring-amber-200  dark:ring-amber-800"  },
-    red:    { bg: "bg-red-50    dark:bg-red-900/20",    icon: "text-red-600    dark:text-red-400",    ring: "ring-red-200    dark:ring-red-800"    },
+    green:  { container: "bg-emerald-100 dark:bg-emerald-900 shadow-emerald-500/40 dark:shadow-emerald-900/50", icon: "text-emerald-600 dark:text-emerald-400", ambient: "bg-emerald-400" },
+    blue:   { container: "bg-indigo-100 dark:bg-indigo-900 shadow-indigo-500/40 dark:shadow-indigo-900/50", icon: "text-indigo-600 dark:text-indigo-400", ambient: "bg-indigo-400"  },
+    amber:  { container: "bg-amber-100 dark:bg-amber-900 shadow-amber-500/40 dark:shadow-amber-900/50", icon: "text-amber-600 dark:text-amber-400", ambient: "bg-amber-400"   },
+    red:    { container: "bg-rose-100 dark:bg-rose-900 shadow-rose-500/40 dark:shadow-rose-900/50", icon: "text-rose-600 dark:text-rose-400", ambient: "bg-rose-400"    },
+    purple: { container: "bg-violet-100 dark:bg-violet-900 shadow-violet-500/40 dark:shadow-violet-900/50", icon: "text-violet-600 dark:text-violet-400", ambient: "bg-violet-400"  },
   };
-  const c = palette[color] ?? palette.blue;
+  const c = palette[color] ?? palette.purple;
 
   return (
-    <div
-      className={`group relative rounded-2xl bg-white dark:bg-gray-900
-        border border-gray-100 dark:border-gray-800 shadow-sm 
-        hover:shadow-md hover:-translate-y-0.5 transition-all duration-200
-        p-3 sm:p-4 xl:p-3 flex items-start gap-2.5 sm:gap-3`}
-    >
-      {/* subtle background glow */}
-      <div className={`absolute -top-6 -right-6 w-24 h-24 rounded-full opacity-30 blur-2xl ${c.bg}`} />
-
-      <div className={`shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-xl ${c.bg} ${c.ring} ring-1
-        flex items-center justify-center transition-transform duration-200 group-hover:scale-110`}>
-        <Icon className={`w-5 h-5 ${c.icon}`} />
+    <div className="group relative mt-7">
+      {/* ── Icon container — half overlapping the top edge ── */}
+      <div className="absolute -top-7 left-1/2 -translate-x-1/2 z-10">
+        <div
+          className={`w-14 h-14 rounded-2xl ${c.container}
+            flex items-center justify-center
+            shadow-lg
+            transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-0.5`}
+        >
+          <Icon className={`w-6 h-6 ${c.icon}`} strokeWidth={2} />
+        </div>
       </div>
 
-      <div className="min-w-0 flex-1">
-        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{label}</p>
-        <p className={`font-bold text-gray-900 dark:text-white leading-tight mt-0.5
-          ${large ? "text-xl sm:text-2xl" : "text-lg sm:text-xl"}`}>
+      {/* ── Card body ── */}
+      <div
+        className="relative overflow-hidden rounded-tr-xl
+
+        rounded-bl-xl
+         bg-white dark:bg-gray-900/80
+          border-2
+           border-gray-100 dark:border-gray-800
+           
+          shadow-[0_2px_12px_rgba(0,0,0,0.04)]
+          hover:shadow-[0_6px_24px_rgba(0,0,0,0.07)]
+          transition-all duration-300
+          px-5 pt-9 pb-5 text-center"
+      >
+        {/* Inner ambient glow radiating from top-left */}
+        <div className={`absolute -top-12 left-1/2 -translate-x-1/2 w-40 h-40 rounded-full blur-[50px] opacity-20 pointer-events-none ${c.ambient}`} />
+        <div className={`absolute -top-10 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full blur-[60px] opacity-20 pointer-events-none ${c.ambient}`} />
+
+        {/* Title / Label */}
+        <p className="relative z-10 text-sm font-semibold text-gray-800 dark:text-gray-100 tracking-tight">{label}</p>
+
+        {/* Subtitle / secondary info */}
+        {sub && (
+          <span className="inline-block mt-1.5 px-2.5 py-0.5 rounded-full
+            bg-gray-100 dark:bg-gray-800
+            text-[11px] font-medium text-gray-500 dark:text-gray-400">
+            {sub}
+          </span>
+        )}
+
+        {/* Primary value */}
+        <p className={`font-extrabold text-gray-900 dark:text-white leading-none mt-3
+          ${large ? "text-2xl sm:text-3xl" : "text-xl sm:text-2xl"}`}>
           {value}
         </p>
-        {sub && (
-          <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{sub}</p>
-        )}
       </div>
     </div>
   );
@@ -70,9 +97,9 @@ const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload?.length) {
     return (
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700
-        rounded-xl px-3 py-2 shadow-lg text-sm">
+        rounded-2xl px-4 py-2.5 shadow-xl text-sm">
         <p className="font-semibold text-gray-700 dark:text-gray-200">{label}</p>
-        <p className="text-gray-500 dark:text-gray-400">
+        <p className="text-gray-500 dark:text-gray-400 mt-0.5">
           Students: <span className="font-bold text-gray-800 dark:text-white">{payload[0].value}</span>
         </p>
       </div>
@@ -81,12 +108,12 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
-/* progress bar helper */
+/* progress bar helper — thin & rounded */
 function ProgressBar({ pct, color }) {
   return (
-    <div className="h-2 w-full bg-gray-100 dark:bg-gray-800 rounded-full ">
+    <div className="h-1.5 w-full bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
       <div
-        className={`h-full rounded-full transition-all duration-700 ${color}`}
+        className={`h-full rounded-full transition-all duration-700 ease-out ${color}`}
         style={{ width: `${pct}%` }}
       />
     </div>
@@ -183,9 +210,12 @@ export default function AdminDashboard({ onMenu }) {
     { label: "Partial", count: partialStudents, pct: totalStudents ? Math.round((partialStudents / totalStudents) * 100) : 0, bar: "bg-amber-400",   dot: "bg-amber-400"   },
   ];
 
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-PK", { notation: "compact", maximumFractionDigits: 1 }).format(amount);
+  };
+
   return (
-    <div className="w-full min-w-0 bg-gray-50 dark:bg-gray-950 lg:h-screen">
-      <div className="h-full w-full px-4 py-4 sm:px-5 lg:px-6 xl:px-8 lg:py-3 grid gap-3 sm:gap-4 lg:gap-3 lg:grid-rows-[auto_auto_auto_1fr] overflow-y-auto ">
+    <div className="h-full w-full px-4 py-4 sm:px-5 lg:px-6 xl:px-8 lg:py-3 grid gap-3 sm:gap-4 lg:gap-3 lg:grid-rows-[auto_auto_auto_1fr] overflow-y-auto">
 
         {/* ── Header ── */}
         <PageHeader
@@ -200,7 +230,7 @@ export default function AdminDashboard({ onMenu }) {
     Overview
   </h2>
 
-  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 w-full">
+  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 w-full  ">
     <StatCard
       icon={Users}
       label="Total Students"
@@ -222,7 +252,7 @@ export default function AdminDashboard({ onMenu }) {
     <StatCard
       icon={DollarSign}
       label="Pending Fees"
-      value={`₨ ${totalPending.toLocaleString()}`}
+      value={`₨ ${formatCurrency(totalPending)}`}
       color="amber"
       large
       className="w-full"
@@ -231,7 +261,7 @@ export default function AdminDashboard({ onMenu }) {
     <StatCard
       icon={Wallet}
       label="Fees Collected"
-      value={`₨ ${totalPaid.toLocaleString()}`}
+      value={`₨ ${formatCurrency(totalPaid)}`}
       color="green"
       large
       className="w-full"
@@ -260,8 +290,9 @@ export default function AdminDashboard({ onMenu }) {
   <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
 
     {/* Bar chart — spans 3/5 */}
-    <div className="lg:col-span-3 bg-white dark:bg-gray-900 rounded-2xl p-4 lg:p-5
-      border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col h-[350px]">
+    <div className="lg:col-span-3 bg-white dark:bg-gray-900/80 rounded-3xl p-5 lg:p-6
+      border border-gray-100 dark:border-gray-800
+      shadow-[0_2px_12px_rgba(0,0,0,0.04)] flex flex-col h-[350px]">
       <div className="flex items-center justify-between mb-3">
         <h3 className="font-semibold text-gray-700 dark:text-gray-200 text-sm">
           Fee Status Distribution
@@ -286,8 +317,9 @@ export default function AdminDashboard({ onMenu }) {
     </div>
 
     {/* Quick stats panel — spans 2/5 */}
-    <div className="lg:col-span-2 bg-white dark:bg-gray-900 rounded-2xl p-4 lg:p-5
-      border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col justify-between gap-3 h-[350px]">
+    <div className="lg:col-span-2 bg-white dark:bg-gray-900/80 rounded-3xl p-5 lg:p-6
+      border border-gray-100 dark:border-gray-800
+      shadow-[0_2px_12px_rgba(0,0,0,0.04)] flex flex-col justify-between gap-3 h-[350px]">
 
       <div>
         <h3 className="font-semibold text-gray-700 dark:text-gray-200 text-sm mb-4">
@@ -339,6 +371,5 @@ export default function AdminDashboard({ onMenu }) {
 </section>
 
       </div>
-    </div>
   );
 }

@@ -3,8 +3,8 @@ import { Menu } from "lucide-react";
 function PageHeader({ title, subtitle, actions, onMenuClick, showMenuAlways = false }) {
   
   return (
-    <div className="flex items-center justify-between min-w-0">
-      <div className="flex items-center gap-3">
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 min-w-0 mb-4 sm:mb-6">
+      <div className="flex items-start sm:items-center gap-3">
         {onMenuClick && (
           <button
             onClick={onMenuClick}
@@ -18,7 +18,7 @@ function PageHeader({ title, subtitle, actions, onMenuClick, showMenuAlways = fa
           {subtitle && <p className="text-sm text-gray-500 dark:text-gray-400">{subtitle}</p>}
         </div>
       </div>
-      {actions && <div className="flex items-center gap-2">{actions}</div>}
+      {actions && <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">{actions}</div>}
     </div>
   );
 }

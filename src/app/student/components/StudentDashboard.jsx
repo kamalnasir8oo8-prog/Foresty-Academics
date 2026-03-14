@@ -7,6 +7,25 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxi
 import PageHeader from "../../admin/PageHeader";
 import StatCard from "../../admin/StatCard";
 
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div style={{
+        background: "#1f2937",
+        border: "1px solid #374151",
+        borderRadius: "8px",
+        padding: "6px 12px",
+        color: "#fff",
+        fontSize: 12,
+      }}>
+        <p style={{ margin: 0 }}>{label}: <strong>{payload[0].value}%</strong></p>
+      </div>
+    );
+  }
+  return null;
+};
+
 function attendancePct(records) {
   if (!Array.isArray(records) || !records.length) return 0;
   const present = records.filter((r) => r.status === "Present").length;
@@ -151,13 +170,13 @@ export default function StudentDashboard({ onMenu, onNav, onPhotoSaved, data }) 
         </div>
 
         <div className="space-y-4 lg:col-span-2">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="pt-2 grid grid-cols-1 gap-4 sm:grid-cols-3">
             <StatCard icon={UserCheck} label="Attendance" value={`${pct}%`} color={pct >= 75 ? "green" : pct >= 50 ? "amber" : "red"} />
             <StatCard icon={Award} label="Avg Marks" value={`${avgM}%`} color="blue" />
             <StatCard icon={Wallet} label="Fee" value={fee?.status || "-"} color={fee?.status === "Paid" ? "green" : "amber"} />
           </div>
 
-          <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+          <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900 mt-4">
             <h3 className="mb-3 text-sm font-bold text-gray-700 dark:text-gray-300">Attendance Progress</h3>
             <ProgressBar value={pct} color={pct >= 75 ? "#16a34a" : pct >= 50 ? "#f59e0b" : "#ef4444"} />
             <div className="mt-2 flex justify-between text-xs text-gray-400">
@@ -170,21 +189,26 @@ export default function StudentDashboard({ onMenu, onNav, onPhotoSaved, data }) 
           <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900">
             <h3 className="mb-3 text-sm font-bold text-gray-700 dark:text-gray-300">Performance by Subject</h3>
             {marks.length ? (
-              <ResponsiveContainer width="100%" height={140}>
-                <BarChart
-                  data={marks.map((m) => ({
-                    subject: String(m.subject || "").slice(0, 6),
-                    pct: m.total ? Math.round((m.obtained / m.total) * 100) : 0,
-                  }))}
-                  barSize={28}
-                >
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                  <XAxis dataKey="subject" tick={{ fontSize: 10 }} />
-                  <YAxis domain={[0, 100]} tick={{ fontSize: 10 }} />
-                  <Tooltip formatter={(value) => [`${value}%`, "Score"]} />
-                  <Bar dataKey="pct" fill="#16a34a" radius={[4, 4, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
+<ResponsiveContainer width="100%" height={140}>
+  <BarChart
+    data={marks.map((m) => ({
+      subject: String(m.subject || "").slice(0, 6),
+      pct: m.total ? Math.round((m.obtained / m.total) * 100) : 0,
+    }))}
+    barSize={28}
+  >
+    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" vertical={false} />
+    <XAxis dataKey="subject" tick={{ fontSize: 10, fill: "#111827" }} axisLine={false} tickLine={false} />
+    <YAxis domain={[0, 100]} tick={{ fontSize: 10, fill: "#9ca3af" }} axisLine={false} tickLine={false} />
+ <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(255,255,255,0.05)" }} />
+    <Bar
+      dataKey="pct"
+      fill="#16a34a"
+      radius={[4, 4, 4, 4]}
+      activeBar={{ fill: "#16a34a", radius: [4, 4, 4, 4] }}
+    />
+  </BarChart>
+</ResponsiveContainer>
             ) : (
               <p className="py-4 text-center text-sm text-gray-400">No marks recorded yet</p>
             )}

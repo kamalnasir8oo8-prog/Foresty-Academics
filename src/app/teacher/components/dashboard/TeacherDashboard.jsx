@@ -74,7 +74,7 @@ function TeacherDashboard({ onMenu }) {
 
   return (
     <div>
-        <div className="mx-4 my-3">
+        <div className="mx-4  p-3">
       <PageHeader
         title={cls ? `${cls.name} Dashboard` : "Dashboard"}
         className='m-4'
@@ -101,7 +101,7 @@ function TeacherDashboard({ onMenu }) {
 
       {cls && (
         <>
-          <div className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4 m-4">
+          <div className="mb-6 mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4 m-4">
             <StatCard icon={Users} label="Total Students" value={stats.totalStudents} color="green" />
             <StatCard icon={Wallet} label="Fees Paid" value={stats.feesPaid} color="blue" />
             <StatCard icon={Wallet} label="Fees Partial" value={stats.feesPartial} color="purple" />
@@ -109,11 +109,11 @@ function TeacherDashboard({ onMenu }) {
           </div>
 
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 mx-3">
-            <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+            <div className="rounded-2xl border border-gray-100/50 bg-white/50 p-5 shadow-sm backdrop-blur-md dark:border-gray-800/50 dark:bg-gray-900/40">
               <h3 className="mb-4 text-sm font-bold text-gray-700 dark:text-gray-300">Assigned Classes</h3>
               <div className="space-y-3">
                 {data?.assignedClasses?.map((classItem) => (
-                  <div key={classItem._id} className="flex items-center justify-between rounded-xl border border-gray-100 px-3 py-2 dark:border-gray-800">
+                  <div key={classItem._id} className="flex items-center justify-between rounded-xl border border-gray-100/50 bg-white/40 px-3 py-2 dark:border-gray-800/50 dark:bg-gray-800/40">
                     <div>
                       <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">{classItem.name}</p>
                       <p className="text-xs text-gray-500">Year: {classItem.year}</p>
@@ -124,11 +124,11 @@ function TeacherDashboard({ onMenu }) {
               </div>
             </div>
 
-            <div className="rounded-2xl mx-2 border border-gray-100 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+            <div className="mx-2 rounded-2xl border border-gray-100/50 bg-white/50 p-5 shadow-sm backdrop-blur-md dark:border-gray-800/50 dark:bg-gray-900/40">
               <h3 className="mb-4 text-sm font-bold text-gray-700 dark:text-gray-300">Students In Current Class</h3>
               <div className="space-y-2">
                 {students.map((student) => (
-                  <div key={student._id} className="flex items-center justify-between border-b border-gray-50 py-1.5 dark:border-gray-800">
+                  <div key={student._id} className="flex items-center justify-between border-b border-gray-50/50 py-1.5 dark:border-gray-800/50">
                     <div>
                       <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{student.fullName}</p>
                       <p className="text-xs text-gray-400">Roll No: {student.rollNumber}</p>

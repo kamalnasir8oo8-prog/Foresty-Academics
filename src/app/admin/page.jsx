@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { Suspense } from "react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import AdminClient from "./AdminClient";
@@ -21,7 +22,9 @@ const AdminPage = async () => {
   }
 
   return (
-    <AdminClient />
+    <Suspense fallback={null}>
+      <AdminClient />
+    </Suspense>
   );
 };
 

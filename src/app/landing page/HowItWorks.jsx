@@ -163,7 +163,7 @@ export default function HowItWorks() {
     <section id="how-it-works" className="relative py-24 lg:py-32">
       <div
         className="absolute inset-0"
-        style={{ background: 'linear-gradient(180deg, transparent 0%, rgba(15,41,18,0.4) 50%, transparent 100%)' }}
+        style={{ background: 'linear-gradient(180deg, transparent 0%, rgba(15,41,18,0.2) 50%, transparent 100%)' }}
       />
       <div className="absolute top-0 left-0 right-0 h-px glow-line opacity-15" />
 
@@ -175,7 +175,7 @@ export default function HowItWorks() {
           }`}
         >
           <span
-            className="mb-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-xs font-medium tracking-widest uppercase text-white"
+            className="mb-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-xs font-medium tracking-widest uppercase text-white frosted"
             style={{ fontFamily: "'JetBrains Mono', monospace" }}
           >
             <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none">

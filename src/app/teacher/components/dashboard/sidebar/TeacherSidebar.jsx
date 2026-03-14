@@ -40,7 +40,7 @@ const TeacherSidebar = ({
   <>
       {/* Mobile overlay */}
       {mobileOpen && <div className="fixed inset-0 z-30 bg-black/40 lg:hidden" onClick={() => setMobileOpen(false)}/>}
-      <aside className={`fixed top-0 left-0 h-screen w-64 z-40 flex flex-col bg-green-900 text-white
+      <aside className={`fixed top-0 left-0 h-screen w-64 z-40 flex flex-col bg-gray-900 text-white
         transition-transform duration-300 ${mobileOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}>
         {/* Logo */}
         <div className="flex items-center gap-3 px-5 py-5 border-b border-green-800/60">

@@ -73,7 +73,7 @@ export default function Pricing() {
 
   return (
     <section id="pricing" className="relative py-24 lg:py-32">
-      <div className="absolute inset-0 bg-grid-forest opacity-40" />
+      <div className="absolute inset-0 bg-grid-forest opacity-20" />
       <div className="absolute top-0 left-0 right-0 h-px glow-line opacity-20" />
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -84,13 +84,13 @@ export default function Pricing() {
           }`}
         >
           <span
-            className="mb-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-xs font-medium tracking-widest uppercase text-green-400/90"
+            className="mb-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-xs font-medium tracking-widest uppercase text-green-400/90 frosted"
             style={{ fontFamily: "'JetBrains Mono', monospace" }}
           >
             <svg className="w-3.5 h-3.5" viewBox="0 0 14 14" fill="none">
               <path d="M7 1l1.5 3L12 5l-2.5 2.5.6 3.5L7 9.3l-3.1 1.7.6-3.5L2 5l3.5-1L7 1z" fill="currentColor" />
             </svg>
-            Beta Pricing
+            Pricing Plans
           </span>
           <h2 className="font-display text-4xl sm:text-5xl font-semibold text-ivory-100 mb-5 text-balance">
             Simple Plans,{' '}
@@ -107,7 +107,7 @@ export default function Pricing() {
           {plans.map((plan, i) => (
             <div
               key={plan.name}
-              className={`relative rounded-2xl p-7 flex flex-col transition-all duration-700 ${
+              className={`relative rounded-2xl p-7 flex flex-col transition-all duration-700 frosted ${
                 visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               } ${
                 plan.highlight
@@ -116,11 +116,6 @@ export default function Pricing() {
               }`}
               style={{ transitionDelay: `${i * 120}ms` }}
             >
-              {plan.highlight && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-mono font-semibold tracking-wider bg-green-500 text-forest-950">
-                  BETA - COMING SOON
-                </div>
-              )}
 
               <div className="mb-6">
                 <h3 className="font-display text-2xl font-semibold text-ivory-100 mb-1">{plan.name}</h3>
@@ -167,11 +162,6 @@ export default function Pricing() {
                   {plan.cta}
                 </Link>
               ) : (
-                <div
-                  className="group"
-                  onMouseEnter={() => setShowSoon(true)}
-                  onMouseLeave={() => setShowSoon(false)}
-                >
                   <button
                     type="button"
                     onClick={() => setShowSoon(true)}
@@ -179,14 +169,6 @@ export default function Pricing() {
                   >
                     {plan.cta}
                   </button>
-                  <p
-                    className={`mt-2 text-center font-mono text-[11px] text-green-300/90 transition-opacity duration-200 ${
-                      showSoon ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                    }`}
-                  >
-                    We are in beta. Paid version is coming soon.
-                  </p>
-                </div>
               )}
             </div>
           ))}
@@ -195,7 +177,7 @@ export default function Pricing() {
         <p className={`text-center mt-10 font-body text-sm text-ivory-100/35 transition-all duration-700 delay-400 ${
           visible ? 'opacity-100' : 'opacity-0'
         }`}>
-          Free plan is active now. Premium customization and branded experience will be released after beta.
+          Free plan is active now. Premium customization and branded experience will be available in the paid plan.
         </p>
       </div>
     </section>

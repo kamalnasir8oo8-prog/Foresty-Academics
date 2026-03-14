@@ -102,7 +102,7 @@ export default function StudentClient() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[rgba(15,20,35,0.95)] text-gray-300">
+      <div className="flex min-h-screen items-center justify-center bg-gray-950 text-gray-300">
         <p className="text-sm font-medium">Loading student dashboard...</p>
       </div>
     );
@@ -110,12 +110,12 @@ export default function StudentClient() {
 
   if (error) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[rgba(15,20,35,0.95)] px-4">
-        <div className="w-full max-w-md rounded-2xl border border-red-300 bg-white p-6 text-center">
-          <p className="mb-3 text-sm text-red-600">{error}</p>
+      <div className="flex h-full min-h-screen items-center justify-center bg-gray-950 px-4">
+        <div className="flex max-w-md flex-col items-center gap-4 rounded-2xl border border-red-900/40 bg-gray-900 p-6 text-center shadow-lg">
+          <p className="text-sm font-medium text-gray-300">{error}</p>
           <button
             onClick={() => loadStudentData()}
-            className="rounded-xl bg-gray-900 px-4 py-2 text-sm font-semibold text-white"
+            className="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-gray-900 hover:opacity-90 transition-opacity"
           >
             Try Again
           </button>
@@ -125,7 +125,7 @@ export default function StudentClient() {
   }
 
   return (
-    <div className="flex min-h-dvh w-full overflow-x-hidden bg-[rgba(15,20,35,0.95)]">
+    <div className="flex min-h-dvh w-full overflow-x-hidden bg-gray-950">
       
       {/* Mobile Menu Button */}
       {/* <button
@@ -147,7 +147,14 @@ export default function StudentClient() {
       />
 
       {/* Main Content */}
-      <main className="min-w-0 flex-1 overflow-x-hidden">{content}</main>
+      <main 
+        className="min-w-0 flex-1 overflow-x-hidden bg-cover bg-center bg-no-repeat bg-fixed relative"
+        style={{ backgroundImage: `url('/dashboard.png')` }}
+      >
+        <div className="min-h-full w-full bg-gray-50/80 dark:bg-gray-950/50 backdrop-blur-[2px]">
+          {content}
+        </div>
+      </main>
 
     </div>
   );

@@ -139,7 +139,7 @@ export default function TeacherAttendance({ onMenu }) {
                 setDate(e.target.value);
                 loadAttendance(selectedClassId, e.target.value);
               }}
-              className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200"
+              className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-white dark:border-white dark:bg-gray-900 dark:text-white"
             />
           </div>
         }
@@ -152,7 +152,7 @@ export default function TeacherAttendance({ onMenu }) {
         </div>
       ) : (
         <>
-          <div className="mt-4 mb-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <div className="mt-8 mb-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
             <StatCard icon={Users} label="Total Students" value={totalCount} color="blue" />
             <StatCard icon={CheckCircle} label="Present" value={presentCount} color="green" />
             <StatCard icon={XCircle} label="Absent" value={absentCount} color="red" />

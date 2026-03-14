@@ -22,7 +22,7 @@ export default function StudentAttendancePage({ onMenu, data }) {
     <div className="w-full min-w-0 overflow-x-hidden px-4 py-4 sm:px-5 lg:px-6 lg:py-3 xl:px-8">
       <PageHeader title="Attendance" subtitle="Your attendance record" onMenuClick={onMenu} />
 
-      <div className="mb-6 mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
+      <div className="mb-6 mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
         <StatCard icon={GraduationCap} label="Overall" value={`${pct}%`} color={pct >= 75 ? "green" : pct >= 50 ? "amber" : "red"} />
         <StatCard icon={CheckCircle} label="Present" value={presentCount} color="green" />
         <StatCard icon={XCircle} label="Absent" value={absentCount} color="red" />
