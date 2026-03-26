@@ -9,15 +9,15 @@ const footerLinks = {
     { label: 'Email Us', href: 'mailto:forestynexus@gmail.com', external: true },
     { label: 'GitHub', href: 'https://github.com/FORESTY-NEXUS', external: true },
     { label: 'Instagram', href: 'https://www.instagram.com/kamal_.unfiltered?igsh=eWcydGZ2ZXlseXBl', external: true },
-    { label: 'X', href: '#', disabled: true },
+    { label: 'X', href: 'https://x.com/FORESTY_NEXUS', external: true },
   ],
 };
 
 const socials = [
   {
     label: 'X',
-    href: '#',
-    disabled: true,
+    href: 'https://x.com/FORESTY_NEXUS',
+    disabled: false,
     icon: (
       <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
         <path d="M16.99 0H20l-6.89 7.87L21 20h-5.71l-4.64-6.07L5.12 20H2.09l7.37-8.42L1 0h5.86l4.21 5.5L16.99 0zm-1.06 17.98h1.64L5.13 1.67H3.37l12.56 16.31z" />
@@ -102,7 +102,7 @@ export default function Footer() {
 
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category} className="md:col-span-1 lg:col-span-2 space-y-4">
-              <h4 className="font-mono text-xs font-medium text-gold-400/70 tracking-widest uppercase">
+              <h4 className="font-mono text-xs font-medium text-gold-400/70 tracking-widest uppercase underline">
                 {category}
               </h4>
               <ul className="space-y-2.5">
@@ -115,8 +115,8 @@ export default function Footer() {
                     ) : link.external ? (
                       <a
                         href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        target={link.href.startsWith('mailto:') ? undefined : "_blank"}
+                        rel={link.href.startsWith('mailto:') ? undefined : "noopener noreferrer"}
                         className="font-body text-sm text-ivory-100/40 hover:text-ivory-100/80 transition-colors duration-200"
                       >
                         {link.label}
